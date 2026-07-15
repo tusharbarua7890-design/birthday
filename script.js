@@ -243,3 +243,9 @@ setInterval(firework,1200);
 animate();
 
 }
+function openGift(){
+
+document.getElementById("giftMessage").innerHTML =
+"✨ Surprise! You unlocked a special message ❤️";
+
+}
