@@ -1,48 +1,46 @@
-function nextPage() {
-    window.location.href = "surprise.html";
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-// Floating Hearts
-const hearts = document.getElementById("hearts");
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function createHeart() {
+<title>Surprise ❤️</title>
 
-    const heart = document.createElement("div");
+<link rel="stylesheet" href="style.css">
 
-    heart.innerHTML = "❤";
+</head>
 
-    heart.style.position = "absolute";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "100vh";
+<body>
 
-    heart.style.fontSize = (20 + Math.random() * 20) + "px";
+<canvas id="fireworks"></canvas>
 
-    heart.style.color = "rgba(255,255,255,0.8)";
-    heart.style.animation = `float ${4 + Math.random() * 4}s linear forwards`;
+<div class="container">
 
-    hearts.appendChild(heart);
+<h1>❤️ Happy Birthday Mim ❤️</h1>
 
-    setTimeout(() => {
-        heart.remove();
-    }, 8000);
-}
+<p class="message">
+You are one of the most beautiful parts of my life.
 
-setInterval(createHeart, 300);
+Thank you for every smile, every memory,
+and every little moment.
 
-// Floating animation
-const style = document.createElement("style");
+I hope your life is always filled with happiness,
+success and love.
 
-style.innerHTML = `
-@keyframes float{
-    0%{
-        transform:translateY(0) rotate(0deg);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-120vh) rotate(360deg);
-        opacity:0;
-    }
-}
-`;
+Never stop smiling.
 
-document.head.appendChild(style);
+🎂 Happy Birthday, My Queen ❤️
+</p>
+
+<button onclick="window.location.href='index.html'">
+Back ❤️
+</button>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
