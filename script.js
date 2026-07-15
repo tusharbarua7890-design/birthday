@@ -165,20 +165,83 @@ setInterval(createFirework,1200);
 animate();
 
 }
-function answer(correct){
+let currentQuestion = 0;
+let score = 0;
 
-const result=document.getElementById("result");
+const questions = [
+{
+q:"My favourite colour? 🎨",
+a:["Black 🖤","Pink 💗","Blue 💙"],
+correct:0
+},
+{
+q:"What makes me happiest? 😊",
+a:["Your smile ❤️","Money 💰","Food 🍕"],
+correct:0
+},
+{
+q:"My special person? 👑",
+a:["Nobody","Mim ❤️","Random"],
+correct:1
+}
+];
 
-if(correct){
 
-result.innerHTML="🥰 Correct! You really know me ❤️";
+function loadQuestion(){
+
+let q = questions[currentQuestion];
+
+document.getElementById("question").innerHTML=q.q;
+
+
+let html="";
+
+q.a.forEach((answer,index)=>{
+
+html += `<button onclick="checkAnswer(${index})">${answer}</button>`;
+
+});
+
+
+document.getElementById("answers").innerHTML=html;
+
+}
+
+
+function checkAnswer(index){
+
+let q=questions[currentQuestion];
+
+
+if(index===q.correct){
+
+score++;
+
+}
+
+
+currentQuestion++;
+
+
+if(currentQuestion < questions.length){
+
+loadQuestion();
 
 }
 
 else{
 
-result.innerHTML="😢 Try again, my Queen ❤️";
+document.getElementById("question").innerHTML=
+"🎉 Quiz Finished! ❤️";
+
+document.getElementById("answers").innerHTML="";
+
+document.getElementById("result").innerHTML=
+"You scored "+score+"/"+questions.length+" 💖";
 
 }
 
 }
+
+
+loadQuestion();
