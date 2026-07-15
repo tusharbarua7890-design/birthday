@@ -246,6 +246,10 @@ animate();
 function openGift(){
 
 document.getElementById("giftMessage").innerHTML =
-"✨ Surprise! You unlocked a special message ❤️";
+"✨ Surprise Opened! 🎁<br><br>" +
+"Dear Mim ❤️<br><br>" +
+"You are one of the most special people in my life. " +
+"I hope your every day is filled with happiness, smiles and beautiful moments.<br><br>" +
+"Always keep shining like the queen you are 👑❤️";
 
 }
