@@ -165,3 +165,20 @@ setInterval(createFirework,1200);
 animate();
 
 }
+function answer(correct){
+
+const result=document.getElementById("result");
+
+if(correct){
+
+result.innerHTML="🥰 Correct! You really know me ❤️";
+
+}
+
+else{
+
+result.innerHTML="😢 Try again, my Queen ❤️";
+
+}
+
+}
