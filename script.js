@@ -3,13 +3,13 @@ function nextPage() {
 }
 
 
-// Floating Hearts ❤️
+// ❤️ Floating Hearts
 
 const hearts = document.getElementById("hearts");
 
-if(hearts){
+if (hearts) {
 
-    function createHeart(){
+    function createHeart() {
 
         const heart = document.createElement("div");
 
@@ -18,230 +18,133 @@ if(hearts){
         heart.style.position = "absolute";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.bottom = "-20px";
-        heart.style.fontSize = (15 + Math.random()*25) + "px";
-
-        heart.style.animation =
-        `heartMove ${4 + Math.random()*4}s linear`;
+        heart.style.fontSize = (15 + Math.random() * 25) + "px";
+        heart.style.animation = "heartMove 5s linear";
 
         hearts.appendChild(heart);
 
 
-        setTimeout(()=>{
+        setTimeout(() => {
             heart.remove();
-        },8000);
+        }, 5000);
 
     }
 
-    setInterval(createHeart,300);
+    setInterval(createHeart, 400);
+
 }
 
 
-
-// Typewriter Effect ✨
+// ⌨️ Typewriter Effect
 
 const message = document.querySelector(".message");
 
-if(message){
+if (message) {
 
     const text = message.innerHTML;
 
-    message.innerHTML="";
+    message.innerHTML = "";
 
-    let index=0;
+    let i = 0;
 
 
-    function type(){
+    function typing() {
 
-        if(index < text.length){
+        if (i < text.length) {
 
-            message.innerHTML += text.charAt(index);
+            message.innerHTML += text.charAt(i);
 
-            index++;
+            i++;
 
-            setTimeout(type,35);
+            setTimeout(typing, 30);
 
         }
 
     }
 
-    type();
+    typing();
 
 }
 
 
-
-// Heart Animation
-
-const style=document.createElement("style");
-
-style.innerHTML=`
-
-@keyframes heartMove{
-
-0%{
-transform:translateY(0) scale(1);
-opacity:1;
-}
-
-100%{
-transform:translateY(-110vh) scale(1.5);
-opacity:0;
-}
-
-}
-
-`;
-
-document.head.appendChild(style);
-// Fireworks 🎆
+// 🎆 Fireworks
 
 const canvas = document.getElementById("fireworks");
 
-if(canvas){
 
-const ctx = canvas.getContext("2d");
+if (canvas) {
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
+    const ctx = canvas.getContext("2d");
 
 
-function createFirework(){
-
-    let x = Math.random() * canvas.width;
-    let y = Math.random() * (canvas.height / 2);
-
-    for(let i = 0; i < 40; i++){
-
-        particles.push({
-            x:x,
-            y:y,
-            dx:(Math.random()-0.5)*5,
-            dy:(Math.random()-0.5)*5,
-            life:80
-        });
-
-    }
-}
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
 
-function animate(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let particles = [];
 
 
-    particles.forEach((p,index)=>{
+    function firework() {
 
-        ctx.beginPath();
-
-        ctx.arc(p.x,p.y,3,0,Math.PI*2);
-
-        ctx.fillStyle="white";
-
-        ctx.fill();
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height / 2;
 
 
-        p.x += p.dx;
-        p.y += p.dy;
+        for (let i = 0; i < 40; i++) {
 
-        p.life--;
+            particles.push({
 
+                x: x,
+                y: y,
+                dx: (Math.random() - 0.5) * 5,
+                dy: (Math.random() - 0.5) * 5,
+                life: 80
 
-        if(p.life <= 0){
-            particles.splice(index,1);
+            });
+
         }
 
-    });
+    }
 
 
-    requestAnimationFrame(animate);
+    function animate() {
 
-}
-
-
-setInterval(createFirework,1200);
-
-animate();
-
-}
-let currentQuestion = 0;
-let score = 0;
-
-const questions = [
-{
-q:"My favourite colour? 🎨",
-a:["Black 🖤","Pink 💗","Blue 💙"],
-correct:0
-},
-{
-q:"What makes me happiest? 😊",
-a:["Your smile ❤️","Money 💰","Food 🍕"],
-correct:0
-},
-{
-q:"My special person? 👑",
-a:["Nobody","Mim ❤️","Random"],
-correct:1
-}
-];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
-function loadQuestion(){
+        particles.forEach((p, index) => {
 
-let q = questions[currentQuestion];
+            ctx.beginPath();
 
-document.getElementById("question").innerHTML=q.q;
+            ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
 
+            ctx.fillStyle = "white";
 
-let html="";
-
-q.a.forEach((answer,index)=>{
-
-html += `<button onclick="checkAnswer(${index})">${answer}</button>`;
-
-});
+            ctx.fill();
 
 
-document.getElementById("answers").innerHTML=html;
+            p.x += p.dx;
+            p.y += p.dy;
+
+            p.life--;
+
+
+            if (p.life <= 0) {
+
+                particles.splice(index, 1);
+
+            }
+
+        });
+
+
+        requestAnimationFrame(animate);
+
+    }
+
+
+    setInterval(firework, 1200);
+
+    animate();
 
 }
-
-
-function checkAnswer(index){
-
-let q=questions[currentQuestion];
-
-
-if(index===q.correct){
-
-score++;
-
-}
-
-
-currentQuestion++;
-
-
-if(currentQuestion < questions.length){
-
-loadQuestion();
-
-}
-
-else{
-
-document.getElementById("question").innerHTML=
-"🎉 Quiz Finished! ❤️";
-
-document.getElementById("answers").innerHTML="";
-
-document.getElementById("result").innerHTML=
-"You scored "+score+"/"+questions.length+" 💖";
-
-}
-
-}
-
-
-loadQuestion();
