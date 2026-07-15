@@ -93,3 +93,75 @@ opacity:0;
 `;
 
 document.head.appendChild(style);
+// Fireworks 🎆
+
+const canvas = document.getElementById("fireworks");
+
+if(canvas){
+
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+
+function createFirework(){
+
+    let x = Math.random() * canvas.width;
+    let y = Math.random() * (canvas.height / 2);
+
+    for(let i = 0; i < 40; i++){
+
+        particles.push({
+            x:x,
+            y:y,
+            dx:(Math.random()-0.5)*5,
+            dy:(Math.random()-0.5)*5,
+            life:80
+        });
+
+    }
+}
+
+
+function animate(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+    particles.forEach((p,index)=>{
+
+        ctx.beginPath();
+
+        ctx.arc(p.x,p.y,3,0,Math.PI*2);
+
+        ctx.fillStyle="white";
+
+        ctx.fill();
+
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        p.life--;
+
+
+        if(p.life <= 0){
+            particles.splice(index,1);
+        }
+
+    });
+
+
+    requestAnimationFrame(animate);
+
+}
+
+
+setInterval(createFirework,1200);
+
+animate();
+
+}
